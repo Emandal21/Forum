@@ -1,0 +1,17 @@
+Put forum-bootstrap folder in /usr/local/ns/pages/
+Put tcl folder in /usr/local/ns/modules/
+Put forum folder in /usr/local/ns/modules/
+Run forum on: http://localhost:8080/forum-bootstrap/list.tcl
+Reset database on: http://localhost:8080/forum-bootstrap/reset.tcl
+
+Things that were additionally implemented:
+1. Upvoting and Downvoting for comments - every comment has property "voting" which is initially set to 0. In edit.tcl file, I added a proc for this function which calls actions.tcl file where actual voting is done by increasing/decreasing variable voting of comment $obj for post $p.
+
+2. Rating - similarly as Upvoting/Downvoting rating is used to rate posts. Every post can be rated from 1 to 5, by clicking on stars on edit page. Class Posting has two additional properties: ratings which is an array of all ratings and a property rating which is average rating (initially 0, using init funcion). When each rate is added, average rating is recalculated. Again, I added proc for this functionality in bi.tcl file which calls actions.tcl file in which new rating is added to array of ratings and variable rating is set to average rating for posting $p.
+
+3. Editing post title and content - for this, I created additional modal modal-title.adp which is opened when pencil icon next to posting is clicked. This was supported by existing function for adding and reading modal. Additionally, I added a method for setting a title and content of posting in Class Posting and used it in actions.tcl file to set new title and content for edited posting $p. 
+
+4. Simple User Management was implemented which supports logging in and logging out. No validation is provided. Only logged in user can edit posts, vote, rate, domment, reply and add new postings.
+
+5. In forum.adp file I used some bootstrap elements to change user interface.
+
